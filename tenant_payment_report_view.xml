@@ -1,0 +1,62 @@
+<odoo> 
+	<data>
+	 <!--Report for Tenant Payment -->
+        <report id="report_tenant_payment_init"
+	            string="Tenant Payment"
+	            model="account.payment"
+	            report_type="qweb-pdf"
+	            file="pragmatic_property_extension.report_tenant_payment" 
+	            name="pragmatic_property_extension.report_tenant_payment"
+	            menu="False" />
+	
+	<!--Template For Tenant Payment Report -->
+	<template id="report_tenant_payment">
+		<t t-call="report.html_container">
+		<t t-call="property_management.property_external_layout" />
+			<t t-foreach="docs" t-as="o">
+					<div class="page">
+						<div class="row">
+							<h2>
+								<span><center>Tenant Payment Details</center></span>
+							</h2>
+						</div>
+						<br/><br/>
+						 <div class="row mt32 mb32">
+							<div class="text-center">
+								<strong>From:</strong>
+								<span t-esc="data['form']['start_date']"/>&#160;&#160;&#160;
+								<strong>To:</strong>
+								<span t-esc="data['form']['end_date']"/>
+							</div>
+						</div>
+						<br />
+						<table class="table table-condensed">
+							<tr style="background-color:#f9f9f9;">
+								<td class="text-left"><strong>Partner</strong></td>
+								<td class="text-left"><strong>Payment Journal</strong></td>
+								<td class="text-left"><strong>Payment Date</strong></td>
+								<td class="text-left"><strong>Tenancy</strong></td>
+								<td class="text-left"><strong>From Month</strong></td>
+								<td class="text-left"><strong>Amount</strong></td>
+								<td class="text-left"><strong>Currency</strong></td>
+								<td class="text-left"><strong>Status</strong></td>
+								
+							</tr>
+							<tr t-foreach="get_details(data['form']['start_date'],data['form']['end_date'])" t-as="t">
+								<td class="text-left"><span t-field="t.partner_id.name"/></td>
+								<td class="text-left"><span t-field="t.journal_id.name"/></td>
+								<td class="text-left"><span t-field="t.payment_date"/></td>
+								<td class="text-left"><span t-field="t.tenancy_id.name"/></td>
+								<td class="text-left"><span t-field="t.communication"/></td>
+								<td class="text-left"><span t-field="t.amount"/></td>
+								<td class="text-left"><span t-field="t.currency_id.name"/></td>
+								<td class="text-left"><span t-field="t.state"/></td>
+							</tr>
+						 </table>
+					</div>
+			</t>
+		</t>
+	</template>
+
+</data>
+</odoo>
