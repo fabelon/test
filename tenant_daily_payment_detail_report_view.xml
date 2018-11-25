@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Tenant Daily Payment Report wizard Form View  -->
+		<record id="tenancy_daily_payment_report" model="ir.ui.view">
+			<field name="name">Tenancy Daily Payment</field>
+			<field name="model">tenant.daily.payment</field>
+			<field name="arch" type="xml">
+				<form string="Tenancy Daily Payment report">
+					<separator string = "Tenant Daily Payment" colspan="2"/>
+					<group>
+						<field name="start_date" />
+						<field name="end_date" />
+					</group>
+					<footer>
+						<button special="cancel" string="Cancel" icon="gtk-cancel" class="oe_highlight"/>
+						<button name="print_report" string="Print" type="object" icon="gtk-print" class="oe_highlight"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<!--Action for Tenant Daily Payment Report wizard -->
+		<record id="action_tenant_daily_payment" model="ir.actions.act_window">
+			<field name="name">Tenants Payment</field>
+			<field name="res_model">tenant.daily.payment</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+		<menuitem name="Tenants Daily Payment" id="menu_tenant_daily_payment" parent="property_management.menu_report_sub" action="action_tenant_daily_payment"/> 
+	</data>
+</odoo>
